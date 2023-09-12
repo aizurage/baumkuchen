@@ -10,3 +10,11 @@
 
 ## 起動方法
 `npm run dev` を実行し、`http://localhost:3000` をブラウザで表示する
+
+## 追加ファイル　
+
+- app/routes/test_index.jsx  　　
+- app/routes/test.second_index.jsx　　　　　　
+- app/routes/test.second.third.jsx　　　　　　
+
+それぞれにページ名と前後ページへのリンクを貼ってます
