@@ -17,4 +17,4 @@
 - app/routes/test.second_index.jsx　　　　　　
 - app/routes/test.second.third.jsx　　　　　　
 
-それぞれにページ名と前後ページへのリンクを貼ってます
+・３つあるのでゲーム画面（上からカード表示画面->回答画面->リザルト表示に使おうと思います
