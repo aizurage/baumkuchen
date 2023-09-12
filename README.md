@@ -1,29 +1,12 @@
-# 使い方
+# バームクーヘンプロジェクト
 
--https://remix.run/docs/en/main/tutorials/blogを
-  ```sh
-  npx create-remix@latest --template remix-run/indie-stack blog-tutorial
-  ? Do you want me to run `npm install`? Yes
-  ```
- のところまでやる
+## 最初に起動するまでの準備
+1. リポジトリをcloneする。
+2. チームメンバーから `.env` ファイルを受け取り、cloneして取得したプロジェクトの直下に配置する。
+3. 以降のコマンドを実行するためにカレントディレクトリを、リポジトリをcloneして作成されたディレクトリに変更する(`cd` コマンドを使う等で変更する)。
+4. `npm init` を実行する。
+5. `npx prisma migrate dev --name "create post model"` を実行する。
+6. `npx prisma db seed` を実行する。
 
--pullしてエラーが出たら以下
-  ```sh
-  git fetch origin
-  git reset --hard FETCH_HEAD
-  ```
- を実行してからpull
-
--blog-tutorialのディレクトリで以下のコマンドを実行（順番に）
-  ```sh
-  npx prisma migrate dev --name "create post model"
-  npx prisma db seed
-
-  npm add marked@^4.3.0
-  npm add @types/marked@^4.3.1 -D
-
-  npm run dev
-  ```
-
-それからhttp://localhost:3000
-を開けばみれる（はず）
+## 起動方法
+`npm run dev` を実行し、`http://localhost:3000` をブラウザで表示する
