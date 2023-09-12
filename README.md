@@ -25,4 +25,4 @@
   npm run dev
   ```
 
-それからhttp://localhost:3000を開けばみれます
+それからhttp://localhost:3000を開けばみれる（はず）
