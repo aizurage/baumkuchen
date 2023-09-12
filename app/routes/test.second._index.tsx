@@ -12,7 +12,8 @@ export default function AdminIndex() {
                 Link to Test Third Page -{'>>>'}
         </Link>
 
-        <p>test/second</p>
+        <p>/app/route/test.second_index</p>
+        <p>test.second_index.tsxで作ったほうがよかった？？</p>
       </main>
   );
 }

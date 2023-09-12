@@ -12,7 +12,8 @@ export default function AdminIndex() {
           ,Link to Test First Page-{'>>>'}
         </Link>
 
-        <p>test/second/third</p>
+        <p>test.second.third</p>
+        <p>名前はてきとうです</p>
         
       </main>
   );

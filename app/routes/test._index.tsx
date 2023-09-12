@@ -23,7 +23,7 @@ export default function Posts() {
           Link to Test Second Page -{'>>>'}
         </Link>
         
-        <p>/test</p>
+        <p>/app/route/test._index.tsx</p>
       </main>
     );
   }
