@@ -13,14 +13,14 @@ export default function Posts() {
     return (
       <main>
         <h1 style={{ color: 'pink', fontSize : 50}}>Test First Page</h1>
-        <Link to="/test/second/third" className="text-red-600 underline">
-         {'<<<'}- Link to Test Third Page
+        <Link to="/test/game" className="text-red-600 underline">
+         - ゲームへのリンク
         </Link>
 
         <p></p>
 
-        <Link to="second" className="text-red-600 underline">
-          Link to Test Second Page -{'>>>'}
+        <Link to="register" className="text-red-600 underline">
+         - ゲーム登録 & 掲示板へのリンク
         </Link>
         
         <p>/app/route/test._index.tsx</p>
