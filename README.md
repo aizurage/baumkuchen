@@ -20,7 +20,7 @@
 - app/routes/test.game.cardPage :
   カードを表示する画面
 - app/routes/test.game.Answer :
-  回答画面, quiz.tsxもあるので後で確認します。　　　　　　
+  回答画面 になる予定でしたが、quiz.tsxを作ってくれたので、そっちにリンクしてあります。のでこのファイルは使ってません。　　　　　
 - app/routes/test.register._index :
   ゲームの登録に関するページへのリンク
 - app/routes/test.register.postNew　:
