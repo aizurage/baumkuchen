@@ -10,7 +10,7 @@
 -pullしてエラーが出たら以下
   ```sh
   git fetch origin
-　git reset --hard FETCH_HEAD
+  git reset --hard FETCH_HEAD
   ```
  を実行してからpull
 
