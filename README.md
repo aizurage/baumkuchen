@@ -13,8 +13,19 @@
 
 ## 追加ファイル　
 
-- app/routes/test_index.jsx  　　
-- app/routes/test.second_index.jsx　　　　　　
-- app/routes/test.second.third.jsx　　　　　　
+- app/routes/test_index.jsx :
+  ゲームの入口、ゲーム登録の入口へのリンクがあります。　
+- app/routes/test.game._index :
+  ゲームの各ページへのリンク
+- app/routes/test.game.cardPage :
+  カードを表示する画面
+- app/routes/test.game.Answer :
+  回答画面 になる予定でしたが、quiz.tsxを作ってくれたので、そっちにリンクしてあります。のでこのファイルは使ってません。　　　　　
+- app/routes/test.register._index :
+  ゲームの登録に関するページへのリンク
+- app/routes/test.register.postNew　:
+  ゲームを新規登録する。名前newPostにすればよかった
+- app/routes/test.register.forum :
+  新規登録されたゲームを表示する画面　　　　
 
-・３つあるのでゲーム画面（上からカード表示画面->回答画面->リザルト表示に使おうと思います
+
