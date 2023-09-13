@@ -4,6 +4,10 @@ import { prefectures } from '../../data/prefectures';
 import { locations} from '../../data/locations';
 import{timeTable} from '../../data/timeTable'
 import{games} from '../../data/games'
+import { Form } from "@remix-run/react";
+
+const inputClassName =
+  "w-full rounded border border-gray-500 px-2 py-1 text-lg";
 
 export default function PostNew() {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -111,7 +115,28 @@ export default function PostNew() {
         )}
 
   <br></br><br></br>
-  
+                
+
+
+
+        {/*詳細入力*/}
+
+      <Form method="post">
+      <p>
+        <label htmlFor="markdown">詳細を入力してください </label>
+        <br />
+        <textarea
+          id="markdown"
+          rows={5}
+          cols={33}
+          name="markdown"
+          className={`${inputClassName} font-mono`}
+        />
+      </p>
+    </Form>
+
+    <br></br><br></br>
+
         {/* 回答ボタン */}
         <p>投稿</p>
       </div>
