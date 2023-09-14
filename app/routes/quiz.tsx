@@ -33,9 +33,11 @@ export default function Quiz() {
         )}
   
         {/* 回答ボタン */}
-        <Link to={selectedPrefecture === correctAnswer ? "/correct" : "/incorrect"}>
-          回答
-        </Link>
+        {selectedPrefecture !== "" && (
+          <Link to={selectedPrefecture === correctAnswer ? "/correct" : "/incorrect"}>
+            ここをクリックして解答確定
+          </Link>
+        )}
       </div>
     );
   }

@@ -22,7 +22,7 @@ export default function GameIndex() {
         <p></p>
 
         <Link to="/quiz" className="text-red-600 underline">
-         -回答画面へのリンク
+         -解答画面へのリンク
         </Link>
 
         <p></p>
