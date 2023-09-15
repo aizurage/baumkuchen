@@ -1,5 +1,5 @@
 import { prisma } from "~/db.server";
-import type { Post } from "@prisma/client";
+import type { Post, GamePost } from "@prisma/client";
 
 export async function getPosts() {
   return prisma.post.findMany();
@@ -14,4 +14,3 @@ export async function createPost(
 ) {
   return prisma.post.create({ data: post });
 }
-
