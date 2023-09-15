@@ -1,34 +1,32 @@
-import { useState } from 'react';
 import { Link } from "@remix-run/react";
-import { prefectures } from '../../data/prefectures';
-import { locations} from '../../data/locations';
-import{timeTable} from '../../data/timeTable'
-import{games} from '../../data/games'
-import { Form } from "@remix-run/react";
+import { redirect } from "@remix-run/node";
 
-const inputClassName =
-  "w-full rounded border border-gray-500 px-2 py-1 text-lg";
+let game = '';
+let location = '';
+let time = '';
+let description = '' ;
 
-export default function PostNew() {
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedTime, setSelectedTime] = useState("")
-  const [selectedGame, setSelectedGame] = useState("")
 
-  const [showGameOptions, setShowGameOptions] = useState(false); // 選択肢表示のトグル用
-  const [showLocationOptions, setShowLocationOptions] = useState(false); 
-  const [showTimeOptions, setShowTimeOptions] = useState(false); 
+//postNewで登録が押されると値を代入する
+export function RegisterInfo(gm : string, loc : string, t : string, des : string){
+        game = gm;
+        location = loc;
+        time = t;
+        description = des;
+};
+
+export default function Forum() {
   
-
   return (
 
-      <div>
+    
+    <main>
+        
+        <h1 style={{ color: 'green', fontSize : 50}}>Forum Page</h1>
+        <p style={{fontSize : 30 }}>掲示板</p>
 
-                
-        <h1 style={{ color: 'green', fontSize : 50}}>Post New Page</h1>
-        <p style={{fontSize : 30 }}>ゲーム新規登録 画面</p>
-
-        <Link to="../register/forum" className="text-red-600 underline">
-        - 掲示板へ
+        <Link to="/test/register/postNew" className="text-red-600 underline">
+        - ゲーム新規登録へのリンク
         </Link>
         
         <p></p>
@@ -38,108 +36,14 @@ export default function PostNew() {
         </Link>
 
         <p>test.postNew.tsx</p>
-        <p>新しいゲームを登録する画面です</p>
+        <p>登録されたゲーム登録を表示する掲示板です</p>
         
-        <br></br><br></br>
+        <br></br><br></br><br></br>
 
-      {/* -------------------------------------------------------------------------------------------------------------  */}
-
-        <h1 style={{fontSize : 30 }}>ゲームの登録</h1>
-  
-        {/* ゲーム選択肢の入力ボックス */}
-        <div onClick={() => setShowGameOptions(!showGameOptions)}>
-          {selectedGame || "ゲームの種類を選んでください"}
-        </div>
-  
-        {/* ゲームのリスト */}
-        {showGameOptions && (
-          <div>
-            <ul>
-              {games.map(game => (
-                <li key={game} onClick={() => {
-                  setSelectedGame(game);
-                  setShowGameOptions(false); // 選択したらリストを閉じる
-                }}>
-                  {game}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-<br></br><br></br>
-
-        {/* 会場選択肢の入力ボックス */}
-        <div onClick={() => setShowLocationOptions(!showLocationOptions)}>
-          {selectedLocation || "開催地を選んでください"}
-        </div>
-  
-        {/* 会場のリスト */}
-        {showLocationOptions && (
-          <div>
-            <ul>
-              {locations.map(location => (
-                <li key={location} onClick={() => {
-                  setSelectedLocation(location);
-                  setShowLocationOptions(false); // 選択したらリストを閉じる
-                }}>
-                  {location}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-<br></br><br></br>
-
-
-        {/* 開催時間選択肢の入力ボックス */}
-        <div onClick={() => setShowTimeOptions(!showTimeOptions)}>
-          {selectedTime || "開始時間を選んでください"}
-        </div>
-  
-        {/* 開催時間のリスト */}
-        {showTimeOptions && (
-          <div>
-            <ul>
-              {timeTable.map(time => (
-                <li key={time} onClick={() => {
-                  setSelectedTime(time);
-                  setShowTimeOptions(false); // 選択したらリストを閉じる
-                }}>
-                  {time}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-  <br></br><br></br>
-                
-
-
-
-        {/*詳細入力*/}
-
-      <Form method="post">
-      <p>
-        <label htmlFor="markdown">詳細を入力してください </label>
-        <br />
-        <textarea
-          id="markdown"
-          rows={5}
-          cols={33}
-          name="markdown"
-          className={`${inputClassName} font-mono`}
-        />
-      </p>
-    </Form>
-
-    <br></br><br></br>
-
-        {/* 回答ボタン */}
-        <p>投稿</p>
-      </div>
-    );
+        <p>{location}</p>
+        <p>{game}</p>
+        <p>{time}</p>
+        <p>{description}</p>
+      </main>
+  );
 }
-
