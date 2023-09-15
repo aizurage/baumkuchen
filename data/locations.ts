@@ -7,4 +7,4 @@ export const locations = [
     "鶴ヶ城",
     "柳田屋",
     "バウムクーヘン"
-]
+];

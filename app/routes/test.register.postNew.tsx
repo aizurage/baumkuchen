@@ -3,19 +3,14 @@ import { Link } from "@remix-run/react";
 import { locations} from '../../data/locations';
 import{timeTable} from '../../data/timeTable'
 import{games} from '../../data/games'
-import { json, redirect } from "@remix-run/node"; 
 import { RegisterInfo } from './test.register.forum';
-import { useNavigation } from '@remix-run/react';
-import type { ActionArgs } from "@remix-run/node";
+import { useNavigate } from 'react-router-dom';
+import './CSS/postNew.css'
 
 
 const inputClassName =
   "w-full rounded border border-gray-500 px-2 py-1 text-lg";  
-
-
-  export const action  = async ({ request }: ActionArgs) => {
-    return redirect("/test/register/forum");
-  };
+    
 
 
 export default function PostNew() {
@@ -28,6 +23,12 @@ export default function PostNew() {
   const [showLocationOptions, setShowLocationOptions] = useState(false); 
   const [showTimeOptions, setShowTimeOptions] = useState(false); 
 
+  const navigate = useNavigate();
+
+  function handleClick() {
+    RegisterInfo(selectedGame, selectedLocation, selectedTime, description);
+    navigate('/test/register/forum');
+  }
 
   return (
 
@@ -55,10 +56,12 @@ export default function PostNew() {
 
 
         <h1 style={{fontSize : 30 }}>ゲームの登録</h1>
+      <p>ゲームを選択してください</p>
       <div>
         {/* ゲーム選択肢の入力ボックス */}
 
         <select value={selectedGame}>
+        <option value="" selected disabled>選択して下さい</option>
           {games.map(game => (
             <option value={game} onClick={() => {
               setSelectedGame(game);
@@ -69,8 +72,10 @@ export default function PostNew() {
 
 <br></br><br></br>
 
+        <p>会場を選択してください</p>
         {/* 会場選択肢の入力ボックス */}
         <select value={selectedLocation}>
+        <option value="" selected disabled>選択して下さい</option>
           {locations.map(location => (
             <option value={location}  onClick={() => {
               setSelectedLocation(location);
@@ -81,12 +86,14 @@ export default function PostNew() {
 
 <br></br><br></br>
 
+        <p>開催時間を選択して下さい</p>
         {/* 開催時間選択肢の入力ボックス */}
         <select value={selectedTime}>
+        <option value="" selected disabled>選択して下さい</option>
           {timeTable.map(time => (
             <option value={time} onClick={() => {
               setSelectedTime(time);
-                  setShowTimeOptions(false); 
+              setShowTimeOptions(false); 
             }}>{time}</option>
           ))}
         </select>
@@ -96,7 +103,7 @@ export default function PostNew() {
         {/*詳細入力*/}
 
       
-      <p>
+      <p>詳細を入力してください
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
@@ -111,12 +118,10 @@ export default function PostNew() {
 
         {/* ボタン */}
         <button onClick={() => 
-          RegisterInfo(selectedGame, selectedLocation, selectedTime, description)}>
+          handleClick()}>
           とうろく
         </button>
 
-
-          <p>{selectedGame}</p>
       </div>
 
                

@@ -13,12 +13,13 @@ export function RegisterInfo(gm : string, loc : string, t : string, des : string
         location = loc;
         time = t;
         description = des;
-
-        return redirect("/posts/admin");
 };
 
 export default function Forum() {
+  
   return (
+
+    
     <main>
         
         <h1 style={{ color: 'green', fontSize : 50}}>Forum Page</h1>
