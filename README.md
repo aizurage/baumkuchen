@@ -1,5 +1,23 @@
 # バームクーヘンプロジェクト
 
+## 作業の前に
+### インストールしておくもの
+- Visual Studio Code
+- Node.js
+- Git
+- SourceTree
+
+### clone実行時の注意点
+後の手順でリポジトリのcloneがあるが、SourceTreeでcloneしようとした際、GitHubの認証に失敗することがある。  
+この場合は、コマンドを使用してcloneをする。コマンドは以下である。  
+`git clone https://github.com/aizurage/baumkuchen.git`
+
+### cloneしたファイルの配置場所
+Windowsの場合、OneDriveの管理下のディレクトリにはclone**しない**こと。  
+以下が理由である。
+- ファイルを編集するたびにOneDriveとの通信が発生する
+- 開発中に一時的に大きなファイルが配置されるが、それもOneDriveが同期してしまう可能性がある。
+
 ## 最初に起動するまでの準備
 1. リポジトリをcloneする。
 2. チームメンバーから `.env` ファイルを受け取り、cloneして取得したプロジェクトの直下に配置する。
