@@ -67,7 +67,7 @@ export function Answer({ correctAnswer }: AnswerProps) {
           </option>
         ))}
       </select>
-
+      <p></p>
       {/* 回答ボタン */}
       {selectedPrefecture !== "" && (
         <Link to={selectedPrefecture === correctAnswer ? "/correct" : "/incorrect"}>
