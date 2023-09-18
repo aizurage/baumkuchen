@@ -70,7 +70,7 @@ export function Answer({ correctAnswer }: AnswerProps) {
       <p></p>
       {/* 回答ボタン */}
       {selectedPrefecture !== "" && (
-        <Link to={selectedPrefecture === correctAnswer ? "/correct" : "/incorrect"}>
+        <Link to={selectedPrefecture === correctAnswer ? "/countdown?answer=A" : "/countdown?answer=B"}>
           ここをクリックして解答確定
         </Link>
       )}
