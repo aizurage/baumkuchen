@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
-
+import QRCodePage from './QR';
 let game = '';
 let location = '';
 let time = '';
@@ -44,6 +44,7 @@ export default function Forum() {
         <p>{game}</p>
         <p>{time}</p>
         <p>{description}</p>
+        <QRCodePage />
       </main>
   );
 }
