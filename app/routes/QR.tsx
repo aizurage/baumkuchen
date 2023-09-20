@@ -1,6 +1,5 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import QRCode from 'qrcode.react';
-
 
 export default function QRCodePage() {
     const [showQR, setShowQR] = useState(false);
@@ -8,10 +7,30 @@ export default function QRCodePage() {
 
     return (
         <div>
-            {showQR ? (<QRCode value={targetURL}/>
-            ):(
-                <button onClick={() => setShowQR(true)} className='place-content-center'>QRコードを表示</button>
-            )}
+            {showQR ? 
+                (
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <QRCode value={targetURL} alt="QR code for Card Page" />
+                    </div>
+                ) :
+                (
+                    <button 
+                        onClick={() => setShowQR(true)} 
+                        style={{
+                            backgroundColor: '#D7EEFF', 
+                            width: 50,
+                            height: 25,
+                            marginLeft: 250,
+                            borderRadius: 50,
+                            border: 'none',
+                            cursor: 'pointer',
+                            outline: 'none'
+                        }}
+                    >
+                        QR
+                    </button>
+                )
+            }
         </div>
     )
 }

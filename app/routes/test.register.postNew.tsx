@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import './CSS/postNew.css'
 
 
+
 const inputClassName =
   "w-full rounded border border-gray-500 px-2 py-1 text-lg";  
     
@@ -82,12 +83,12 @@ export default function PostNew() {
 
         <p>開催時間を選択して下さい</p>
         {/* 開催時間選択肢の入力ボックス */}
-        <select value={selectedTime}>
-        <option value="" selected disabled>選択して下さい</option>
+        <select value={selectedTime} onChange={(event) => {
+          setSelectedTime(event.target.value);
+        }}>
+        <option value="" disabled>選択して下さい</option>
           {timeTable.map(time => (
-            <option value={time} onClick={() => {
-              setSelectedTime(time);
-            }}>{time}</option>
+            <option value={time} >{time}</option>
           ))}
         </select>
 
