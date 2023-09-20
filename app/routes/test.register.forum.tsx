@@ -1,5 +1,6 @@
-import { Link } from "@remix-run/react";
+import { Link, } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
+
 import QRCodePage from './QR';
 let game = '';
 let location = '';
@@ -16,6 +17,7 @@ export function RegisterInfo(gm : string, loc : string, t : string, des : string
 };
 
 export default function Forum() {
+
   
   return (
 
@@ -38,6 +40,7 @@ export default function Forum() {
         <p>登録されたゲーム登録を表示する掲示板です</p>
         
         <br></br><br></br><br></br>
+        { game !=="" && (
         <div style={{width :335,marginLeft : 'auto', marginRight: 'auto',borderRadius: 10,overflow:'hidden'}}>
           <p style={{ backgroundColor: '#D7EEFF', height: 50, fontSize: 30, textAlign: 'center',color:'#FFFFEE',}}>{game}</p>
           <div style={{ backgroundColor: '#EEFFFF',color:'dodgerblue'}}>
@@ -47,6 +50,7 @@ export default function Forum() {
             <QRCodePage />
           </div>
         </div>
+        )}
 
     </main>
   );
