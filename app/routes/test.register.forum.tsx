@@ -44,7 +44,7 @@ export default function Forum() {
         <div style={{width :335,marginLeft : 'auto', marginRight: 'auto',borderRadius: 10,overflow:'hidden'}}>
           <p style={{ backgroundColor: '#D7EEFF', height: 50, fontSize: 30, textAlign: 'center',color:'#FFFFEE',}}>{game}</p>
           <div style={{ backgroundColor: '#EEFFFF',color:'dodgerblue'}}>
-            <p style = {{ fontSize: 20, fontWeight:'bold'}}>{location}　　　　{time}~</p>
+            <p style = {{ fontSize: 20, fontWeight:'bold'}}>　{location}　　　　{time}~</p>
             <p style = {{margin: 20}}></p>
             <p style = {{margin: 20}}>{description}</p>
             <QRCodePage />
