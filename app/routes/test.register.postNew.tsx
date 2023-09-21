@@ -97,12 +97,23 @@ export default function PostNew() {
 
       
       <p>詳細を入力してください</p>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <input />  
+      <form>
+  <label htmlFor="description"></label>
+  <textarea
+    id="description"
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
+    style={{
+      border: "1px solid rgb(83, 177, 231)",
+      borderRadius: "5px",
+      height: "130px",
+      width: "320px",
+      marginTop: "20px",
+      marginLeft: "30px"
+    }}
+  />
+</form>
+
       </div>
     <br></br>
 

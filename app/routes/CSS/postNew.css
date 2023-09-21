@@ -5,8 +5,8 @@ input[type="text"] {
   width: 320px;
   margin-top: 20px;
   margin-left: 30px;
+  vertical-align: top;
 }
-
 select {
     border: 1px solid rgb(83, 177, 231);
     border-radius: 5px;
