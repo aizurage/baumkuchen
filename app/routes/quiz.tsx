@@ -25,7 +25,7 @@ export default function Quiz() {
   return (
     <div>
       <h1>都道府県クイズ！！</h1>
-      <h1>相手のユーザーIDを入力してください</h1>
+      <h1>相手のユーザーIDを半角数字で入力してください</h1>
       <input 
         type="text"
         value={userId}
