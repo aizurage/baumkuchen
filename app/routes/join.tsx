@@ -2,11 +2,12 @@ import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+import { prefectures } from "../../data/prefectures";
 
 import { createUser, getUserByEmail } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
-
+console.log(typeof getUserByEmail);
 export const loader = async ({ request }: LoaderArgs) => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
@@ -149,16 +150,20 @@ export default function Join() {
               Hometown
             </label>
             <div className="mt-1">
-              <input
+              <select
                 id="hometown"
                 name="hometown"
-                type="text"
-                autoComplete="off"
                 className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
+              >
+                <option value="" disabled selected>Select your hometown</option>
+                {prefectures.map(prefecture => (
+                  <option key={prefecture} value={prefecture}>
+                    {prefecture}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button

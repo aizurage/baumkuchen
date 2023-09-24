@@ -1,20 +1,71 @@
 import React, { useState } from 'react';
-import { Link } from "@remix-run/react";
-import { prefectures } from '../../data/prefectures';
 import { userdata } from '../../data/userdata';
+import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { useEffect, useRef } from "react";
+import { prefectures } from "../../data/prefectures";
+
+import { createUser, getUserByEmail } from "~/models/user.server";
+import { createUserSession, getUserId } from "~/session.server";
+import { safeRedirect, validateEmail } from "~/utils";
+
+
+
+export const action = async ({ request }: ActionArgs) => {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const existingUser = await getUserByEmail(email);
+  if (existingUser) {
+    return json({
+      hometown: existingUser.hometown,
+    });
+  } else {
+    return json(
+      {
+        errors: {
+          email: "A user does not exist with this email",
+        },
+      },
+      { status: 404 },
+    );
+  }
+};
+
+
 
 export default function Quiz() {
-  const [userId, setUserId] = useState("");
+  const [email, setEmail] = useState("");
   const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>("");
   const [userExists, setUserExists] = useState<boolean>(true);
+  const actionData = useActionData<typeof action>();  
+  const emailRef = useRef<HTMLInputElement>(null);
 
-  const handleUserIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputUserId = e.target.value;
-    setUserId(inputUserId);
-
-    const user = userdata.find(u => u.id === inputUserId);
+  const handleEmailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+    console.log("frag1"); 
+    const user = actionData?.hometown;;
+    console.log("frag2");
     if (user) {
-      setSelectedPrefecture(user.prefecture);
+      setSelectedPrefecture(user.hometown);
+      setUserExists(true);
+    } else {
+      setSelectedPrefecture(null);
+      setUserExists(false);
+    }
+  }
+
+  const handleCheckUser = async () => {
+    // バックエンドにリクエストを送信してユーザー情報を取得
+    const response = await fetch("/your-endpoint", {
+      method: "POST",
+      body: new URLSearchParams({ email: email })
+    });
+    const data = await response.json();
+  
+    if (data.hometown) {
+      setSelectedPrefecture(data.hometown);
       setUserExists(true);
     } else {
       setSelectedPrefecture(null);
@@ -25,19 +76,21 @@ export default function Quiz() {
   return (
     <div>
       <h1>都道府県クイズ！！</h1>
-      <h1>相手のユーザーIDを半角数字で入力してください</h1>
+      <h1>相手のメールアドレスを入力してください</h1>
       <input 
-        type="text"
-        value={userId}
-        onChange={handleUserIdChange}
-        placeholder="ユーザーIDを入力"
+        type="email"
+        name="email"
+        value={email}
+        onChange={handleEmailChange}
+        placeholder="メールアドレスを入力"
         style={{ width: "100%", maxWidth: "300px",height: "25px" }}
       />
+      <button onClick={handleCheckUser}>ユーザーを確認</button>
     
       {userExists ? (
         selectedPrefecture !== "" && <Answer correctAnswer={selectedPrefecture} />
       ) : (
-        <p>そのユーザIDは存在しません。</p>
+        <p>ボタンをおしても画面が変わらないなら、そのメールアドレスは存在しません。</p>
       )}
 
     </div>
