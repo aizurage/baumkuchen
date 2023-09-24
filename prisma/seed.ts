@@ -21,6 +21,8 @@ async function seed() {
           hash: hashedPassword,
         },
       },
+      hometown: "",
+      experiencePoint: 0,
     },
   });
 

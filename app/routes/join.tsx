@@ -17,6 +17,7 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
+  const hometown = formData.get("hometown");
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
   if (!validateEmail(email)) {
@@ -40,6 +41,8 @@ export const action = async ({ request }: ActionArgs) => {
     );
   }
 
+
+
   const existingUser = await getUserByEmail(email);
   if (existingUser) {
     return json(
@@ -53,7 +56,7 @@ export const action = async ({ request }: ActionArgs) => {
     );
   }
 
-  const user = await createUser(email, password);
+  const user = await createUser(email, password, hometown, 0);
 
   return createUserSession({
     redirectTo,
@@ -137,6 +140,25 @@ export default function Join() {
               ) : null}
             </div>
           </div>
+          
+          <div>
+            <label
+              htmlFor="hometown"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Hometown
+            </label>
+            <div className="mt-1">
+              <input
+                id="hometown"
+                name="hometown"
+                type="text"
+                autoComplete="off"
+                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+              />
+            </div>
+          </div>
+
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
