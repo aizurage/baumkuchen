@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+import './CSS/CardPage.css';
 
 export default function CardPage() {
   return (
