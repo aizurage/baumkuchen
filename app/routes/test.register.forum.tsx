@@ -5,16 +5,16 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import QRCodePage from './QR';
-
 import { getPosts } from "~/models/post.server";
 import './CSS/postNew.css';
+import QRCodePage from './QR';
 
 
 
 export const loader = async () => {
   return json({ posts: await getPosts() });
 };
+
 
 export default function PostAdmin() {
   const { posts } = useLoaderData<typeof loader>();
@@ -43,13 +43,5 @@ export default function PostAdmin() {
 }
 
 
-/*{ game !=="" && (
-        <div style={{width :335,marginLeft : 'auto', marginRight: 'auto',borderRadius: 10,overflow:'hidden'}}>
-          <p style={{ backgroundColor: '#D7EEFF', height: 50, fontSize: 30, textAlign: 'center',color:'#FFFFEE',}}>{game}</p>
-          <div style={{ backgroundColor: '#EEFFFF',color:'dodgerblue'}}>
-            <p style = {{ fontSize: 20, fontWeight:'bold'}}>　{location}　　　　{time}~</p>
-            <p style = {{margin: 20}}></p>
-            <p style = {{margin: 20}}>{description}</p>
-            <QRCodePage />
-          </div>
-        </div>*/
+
+

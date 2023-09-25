@@ -71,19 +71,6 @@ export default function NewPost() {
       <h1 style={{fontSize : 30, marginLeft: '90px', marginTop: '30px' }}>ゲームの登録</h1>
       <br></br>
 
-      <p>テンプレートの選択</p>
-        {/* ゲーム選択肢の入力ボックス */}
-
-        <select value={selectedGame} onChange={(event) => {
-  setSelectedGame(event.target.value);
-}}>
-  <option value="" disabled>選択して下さい</option>
-  {games.map(game => (
-    <option value={game}>{game}</option>
-  ))}
-</select>
-
-
       <p>
         <label style={{ width: '10px' }}>
           タイトル:{" "}
