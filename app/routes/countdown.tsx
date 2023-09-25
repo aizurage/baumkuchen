@@ -9,7 +9,7 @@ export default function Countdown() {
         setTimeout(() => {
             const answer = new URLSearchParams(window.location.search).get("answer");
             if (answer === 'A') {
-                navigate("/correct");
+                navigate("/correct?answer=A");
             } else {
                 navigate("/incorrect");
             }
