@@ -33,7 +33,6 @@ export default function CardPage() {
           
           <p>選択されたラジオボタン：{selectedRadioBtnValue}</p>
           {RADIO_VALUES.map((radioValue) => (
-           <p>
            <label className="label" key={radioValue}>
             <input
               className="button"
@@ -41,11 +40,11 @@ export default function CardPage() {
               value={radioValue}
               name="sample"
               onChange={onRadioBtnChanged}
+              // checked={selectedRadioBtnValue === radioValue}
             />
             {radioValue}
             </label>
-          </p>
-        ))}
+          ))}
         </div>
         <Link className="link" to="../test/game/AnswerPage">回答ページへ移動</Link>
       </main>
