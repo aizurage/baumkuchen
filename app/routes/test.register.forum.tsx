@@ -1,46 +1,49 @@
-import { Link, } from "@remix-run/react";
-import { redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import {
+  Link,
+  Outlet,
+  useLoaderData,
+} from "@remix-run/react";
 
 import QRCodePage from './QR';
-let game = '';
-let location = '';
-let time = '';
-let description = '' ;
+
+import { getPosts } from "~/models/post.server";
+import './CSS/postNew.css';
 
 
-//postNewで登録が押されると値を代入する
-export function RegisterInfo(gm : string, loc : string, t : string, des : string){
-        game = gm;
-        location = loc;
-        time = t;
-        description = des;
+
+export const loader = async () => {
+  return json({ posts: await getPosts() });
 };
 
-export default function Forum() {
-
-  
+export default function PostAdmin() {
+  const { posts } = useLoaderData<typeof loader>();
   return (
+    <div className="mx-auto max-w-4xl">
+      <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">
+        Blog Admin
+      </h1>
+            {posts.map((post) => (
+             <div style={{width :335,marginLeft : 'auto', marginRight: 'auto',borderRadius: 10,overflow:'hidden'}}>
+             <p style={{ backgroundColor: '#D7EEFF', height: 50, fontSize: 30, textAlign: 'center',color:'#FFFFEE',}}>{post.title}</p>
+             <div style={{ backgroundColor: '#EEFFFF',color:'dodgerblue'}}>
+               <p style = {{ fontSize: 20, fontWeight:'bold'}}> {post.slug}</p>
+               <p style = {{margin: 20}}></p>
+               <p style = {{margin: 20}}>{post.markdown}</p>
+               <QRCodePage />
+             </div>
+             <br></br><br></br>
+             </div>
+            ))}
+        <main className="col-span-4 md:col-span-3">
+          <Outlet />
+        </main>
+      </div>
+  );
+}
 
-    
-    <main>        
-        <h1 style={{ color: 'gray', fontSize : 50 , textAlign : 'center'}}>本日の開催予定</h1>
-        <p style={{fontSize : 30 }}>掲示板</p>
 
-        <Link to="/test/register/postNew" className="text-red-600 underline">
-        - ゲーム新規登録へのリンク
-        </Link>
-        
-        <p></p>
-
-        <Link to="/test/register" className="text-red-600 underline">
-        - ゲーム登録入口へのリンク
-        </Link>
-
-        <p>test.postNew.tsx</p>
-        <p>登録されたゲーム登録を表示する掲示板です</p>
-        
-        <br></br><br></br><br></br>
-        { game !=="" && (
+/*{ game !=="" && (
         <div style={{width :335,marginLeft : 'auto', marginRight: 'auto',borderRadius: 10,overflow:'hidden'}}>
           <p style={{ backgroundColor: '#D7EEFF', height: 50, fontSize: 30, textAlign: 'center',color:'#FFFFEE',}}>{game}</p>
           <div style={{ backgroundColor: '#EEFFFF',color:'dodgerblue'}}>
@@ -49,9 +52,4 @@ export default function Forum() {
             <p style = {{margin: 20}}>{description}</p>
             <QRCodePage />
           </div>
-        </div>
-        )}
-
-    </main>
-  );
-}
+        </div>*/

@@ -64,7 +64,7 @@ export default function NewPost() {
   return (
     <Form method="post">
       <p>
-        <label>
+        <label style={ {width: '100px'}}>
           Post Title:{" "}
           {errors?.title ? (
             <em className="text-red-600">{errors.title}</em>

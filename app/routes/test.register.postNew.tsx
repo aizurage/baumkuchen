@@ -1,60 +1,77 @@
+import type { ActionArgs } from "@remix-run/node";
 import { useState } from 'react';
-import { Link } from "@remix-run/react";
-import { locations} from '../../data/locations';
-import{timeTable} from '../../data/timeTable'
-import{games} from '../../data/games'
-import { RegisterInfo } from './test.register.forum';
-import { useNavigate } from 'react-router-dom';
+import { json, redirect } from "@remix-run/node";
+import {
+  Form,
+  useActionData,
+  useNavigation
+} from "@remix-run/react";
+import invariant from "tiny-invariant";
+
+import { createPost } from "~/models/post.server";
 import './CSS/postNew.css'
+import {games} from "data/games"
 
+export const action = async ({ request }: ActionArgs) => {
+  // TODO: remove me
+  await new Promise((res) => setTimeout(res, 1000));
 
+  const formData = await request.formData();
 
-const inputClassName =
-  "w-full rounded border border-gray-500 px-2 py-1 text-lg";  
-    
+  const title = formData.get("title");
+  const slug = formData.get("slug");
+  const markdown = formData.get("markdown");
 
-
-export default function PostNew() {
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedTime, setSelectedTime] = useState("")
-  const [selectedGame, setSelectedGame] = useState("")
-  const [description, setDescription] = useState("")
-
-  const navigate = useNavigate();
-
-  function handleClick() {
-    RegisterInfo(selectedGame, selectedLocation, selectedTime, description);
-    navigate('/test/register/forum');
+  const errors = {
+    title: title ? null : "Title is required",
+    slug: slug ? null : "Slug is required",
+    markdown: markdown ? null : "Markdown is required",
+  };
+  const hasErrors = Object.values(errors).some(
+    (errorMessage) => errorMessage
+  );
+  if (hasErrors) {
+    return json(errors);
   }
 
-  return (
+  invariant(
+    typeof title === "string",
+    "title must be a string"
+  );
+  invariant(
+    typeof slug === "string",
+    "slug must be a string"
+  );
+  invariant(
+    typeof markdown === "string",
+    "markdown must be a string"
+  );
 
-      <div>
-                
-        <h1 style={{ color: 'green', fontSize : 50}}>Post New Page</h1>
-        <p style={{fontSize : 30 }}>ゲーム新規登録 画面</p>
+  await createPost({ title, slug, markdown });
 
-        <Link to="/test/register/forum" className="text-red-600 underline">
-        - 掲示板へ
-        </Link>
-        
-        <p></p>
+  return redirect("/test/register/forum");
+};
 
-        <Link to="/test/register" className="text-red-600 underline">
-        - ゲーム登録入口へのリンク
-        </Link>
+const inputClassName =
+  "w-full rounded border border-gray-500 px-2 py-1 text-lg";
 
-        <p>test.postNew.tsx</p>
-        <p>新しいゲームを登録する画面です</p>
-        
-        <br></br><br></br>
+export default function NewPost() {
+  const errors = useActionData<typeof action>();
 
-      {/* -------------------------------------------------------------------------------------------------------------  */}
+  const navigation = useNavigation();
+  const isCreating = Boolean(
+    navigation.state === "submitting"
+  );
+
+  const [selectedGame, setSelectedGame] = useState("")
 
 
-        <h1 style={{fontSize : 30 }}>ゲームの登録</h1>
-      <p>ゲームを選択してください</p>
-      <div>
+  return (    
+    <Form method="post">
+      <h1 style={{fontSize : 30, marginLeft: '90px', marginTop: '30px' }}>ゲームの登録</h1>
+      <br></br>
+
+      <p>テンプレートの選択</p>
         {/* ゲーム選択肢の入力ボックス */}
 
         <select value={selectedGame} onChange={(event) => {
@@ -66,67 +83,65 @@ export default function PostNew() {
   ))}
 </select>
 
-<br></br><br></br>
 
-        <p>会場を選択してください</p>
-        {/* 会場選択肢の入力ボックス */}
-        <select value={selectedLocation} onChange={(event) => {
-          setSelectedLocation(event.target.value);
-        }}>
-          <option value="" disabled>選択して下さい</option>
-  {locations.map(location => (
-    <option value={location}>{location}</option>
-  ))}
-        </select>
-
-<br></br><br></br>
-
-        <p>開催時間を選択して下さい</p>
-        {/* 開催時間選択肢の入力ボックス */}
-        <select value={selectedTime} onChange={(event) => {
-          setSelectedTime(event.target.value);
-        }}>
-        <option value="" disabled>選択して下さい</option>
-          {timeTable.map(time => (
-            <option value={time} >{time}</option>
-          ))}
-        </select>
-
-  <br></br><br></br>
-                
-        {/*詳細入力*/}
-
-      
-      <p>詳細を入力してください</p>
-      <form>
-  <label htmlFor="description"></label>
-  <textarea
-    id="description"
-    value={description}
-    onChange={(e) => setDescription(e.target.value)}
-    style={{
-      border: "1px solid rgb(83, 177, 231)",
-      borderRadius: "5px",
-      height: "130px",
-      width: "320px",
-      marginTop: "20px",
-      marginLeft: "30px"
-    }}
-  />
-</form>
-
-      </div>
-    <br></br>
-
-        {/* ボタン */}
-        <button onClick={() => 
-          handleClick()}>
-          とうろく
+      <p>
+        <label style={{ width: '10px' }}>
+          タイトル:{" "}
+          <br></br>
+          {errors?.title ? (
+            <em className="text-red-600">{errors.title}</em>
+          ) : null}
+          <input type="text" name="title" className={inputClassName} />
+        </label>
+      </p>
+      <br></br>
+      <p>
+        <label style={{ width: '10px' }}>
+          場所:{" "}
+          <br></br>
+          {errors?.slug ? (
+            <em className="text-red-600">{errors.slug}</em>
+          ) : null}
+          <input type="text" name="slug" className={inputClassName} />
+        </label>
+      </p>
+      <br></br>
+      <p>
+        <label htmlFor="markdown">
+          時間・詳細:{" "}
+          {errors?.markdown ? (
+            <em className="text-red-600">
+              {errors.markdown}
+            </em>
+          ) : null}
+        </label>
+        <br />
+        <textarea
+          id="markdown"
+          rows={5}
+          name="markdown"
+          className={`${inputClassName} font-mono`}
+          style={{
+            border: "1px solid rgb(83, 177, 231)",
+            borderRadius: "5px",
+            height: "130px",
+            width: "320px",
+            marginTop: "20px",
+            marginLeft: "30px"
+          }}
+        />
+      </p>
+      <br></br>
+      <p>
+        <button
+          type="submit"
+          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
+          disabled={isCreating}
+          >
+          {isCreating ? "Creating..." : "Create Post"}
+          Create Post
         </button>
-
-      </div>
-
-               
-    );
+      </p>
+    </Form>
+  );
 }
-

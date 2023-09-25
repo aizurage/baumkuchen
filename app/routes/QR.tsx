@@ -10,7 +10,7 @@ export default function QRCodePage() {
             {showQR ? 
                 (
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <QRCode value={targetURL} alt="QR code for Card Page" />
+                        <QRCode value={targetURL}/>
                     </div>
                 ) :
                 (
