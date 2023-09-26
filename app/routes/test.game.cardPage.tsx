@@ -46,7 +46,7 @@ export default function CardPage() {
             </label>
           ))}
         </div>
-        <Link className="link" to="../test/game/AnswerPage">回答ページへ移動</Link>
+        <Link className="link" to="../quiz">回答ページへ移動</Link>
       </main>
   );
 }
