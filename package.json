@@ -84,5 +84,13 @@
   },
   "prisma": {
     "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
-  }
+  },
+  "description": "1. リポジトリをcloneする。\r 2. チームメンバーから `.env` ファイルを受け取り、cloneして取得したプロジェクトの直下に配置する。\r 3. 以降のコマンドを実行するためにカレントディレクトリを、リポジトリをcloneして作成されたディレクトリに変更する(`cd` コマンドを使う等で変更する)。\r 4. `npm init` を実行する。\r 5. `npx prisma migrate dev --name \"create post model\"` を実行する。\r 6. `npx prisma db seed` を実行する。",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
 }
