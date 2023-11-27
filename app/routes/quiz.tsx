@@ -5,6 +5,8 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import { prefectures } from "../../data/prefectures";
+import { useOptionalUser } from "~/utils";
+
 
 import { createUser, getUserByEmail } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -40,6 +42,9 @@ export default function Quiz() {
   const [userExists, setUserExists] = useState<boolean>(true);
   const actionData = useActionData<typeof action>();  
   const emailRef = useRef<HTMLInputElement>(null);
+  const loginUser = useOptionalUser();
+//  console.log(loginUser?.email)
+
 
   const handleEmailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputEmail = e.target.value;
@@ -58,6 +63,9 @@ export default function Quiz() {
 
   const handleCheckUser = async () => {
     // バックエンドにリクエストを送信してユーザー情報を取得
+    if (email == loginUser.email) {
+      console.log(email);
+    } else {
     const response = await fetch("/your-endpoint", {
       method: "POST",
       body: new URLSearchParams({ email: email })
@@ -71,6 +79,7 @@ export default function Quiz() {
       setSelectedPrefecture(null);
       setUserExists(false);
     }
+  }
   }
 
   return (
@@ -90,7 +99,9 @@ export default function Quiz() {
       {userExists ? (
         selectedPrefecture !== "" && <Answer correctAnswer={selectedPrefecture} />
       ) : (
-        <p>ボタンをおしても画面が変わらないなら、そのメールアドレスは存在しません。</p>
+        <p>ボタンをおしても画面が変わらないなら、そのメールアドレスは存在しません。
+          <br></br>また、自分の出身値を答えることはできません。
+        </p>
       )}
 
     </div>
