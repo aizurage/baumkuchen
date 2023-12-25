@@ -71,6 +71,11 @@ export default function NewPost() {
       <h1 style={{fontSize : 30, marginLeft: '90px', marginTop: '30px' }}>ゲームの登録</h1>
       <br></br>
 
+      <div>
+        <p>テンプレートを選んでください</p>
+        <br></br>
+      </div>
+
       <p>
         <label style={{ width: '10px' }}>
           タイトル:{" "}
