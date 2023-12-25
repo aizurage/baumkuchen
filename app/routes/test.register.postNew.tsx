@@ -10,7 +10,7 @@ import invariant from "tiny-invariant";
 
 import { createPost } from "~/models/post.server";
 import './CSS/postNew.css'
-import {games} from "data/games"
+import { createEvent } from "~/models/test.server";
 
 export const action = async ({ request }: ActionArgs) => {
   // TODO: remove me
@@ -19,13 +19,13 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
 
   const title = formData.get("title");
-  const slug = formData.get("slug");
-  const markdown = formData.get("markdown");
+  const description = formData.get("description");
+  const creatorid = formData.get("creatorid");
 
   const errors = {
     title: title ? null : "Title is required",
-    slug: slug ? null : "Slug is required",
-    markdown: markdown ? null : "Markdown is required",
+    description: description ? null : "description is required",
+    creatorid: creatorid ? null : "creatorid is required",
   };
   const hasErrors = Object.values(errors).some(
     (errorMessage) => errorMessage
@@ -39,15 +39,15 @@ export const action = async ({ request }: ActionArgs) => {
     "title must be a string"
   );
   invariant(
-    typeof slug === "string",
+    typeof description === "string",
     "slug must be a string"
   );
   invariant(
-    typeof markdown === "string",
-    "markdown must be a string"
+    typeof creatorid === "string",
+    "creatorid must be a string"
   );
 
-  await createPost({ title, slug, markdown });
+  await createEvent({ title, description, creatorid });
 
   return redirect("/test/register/forum");
 };
@@ -91,37 +91,22 @@ export default function NewPost() {
         <label style={{ width: '10px' }}>
           場所:{" "}
           <br></br>
-          {errors?.slug ? (
-            <em className="text-red-600">{errors.slug}</em>
+          {errors?.description ? (
+            <em className="text-red-600">{errors.description}</em>
           ) : null}
-          <input type="text" name="slug" className={inputClassName} />
+          <input type="text" name="description" className={inputClassName} />
         </label>
       </p>
       <br></br>
       <p>
-        <label htmlFor="markdown">
-          時間・詳細:{" "}
-          {errors?.markdown ? (
-            <em className="text-red-600">
-              {errors.markdown}
-            </em>
+        <label style={{ width: '10px' }}>
+          id:{" "}
+          <br></br>
+          {errors?.creatorid ? (
+            <em className="text-red-600">{errors.creatorid}</em>
           ) : null}
+          <input type="text" name="creatorid" className={inputClassName} />
         </label>
-        <br />
-        <textarea
-          id="markdown"
-          rows={5}
-          name="markdown"
-          className={`${inputClassName} font-mono`}
-          style={{
-            border: "1px solid rgb(83, 177, 231)",
-            borderRadius: "5px",
-            height: "130px",
-            width: "320px",
-            marginTop: "20px",
-            marginLeft: "30px"
-          }}
-        />
       </p>
       <br></br>
       <p>

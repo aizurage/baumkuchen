@@ -55,3 +55,20 @@ model GamePost {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+model Event {
+  id Int @unique @id @default(autoincrement())
+  title String
+  description String
+  creatorid String
+  time DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EventUserInterface{
+  id Int @id
+  userid Int
+}

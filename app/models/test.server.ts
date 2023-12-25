@@ -1,17 +1,12 @@
 import { prisma } from "~/db.server";
-import type { Post, GamePost } from "@prisma/client";
+import type { Post, Event } from "@prisma/client";
 
-export async function getPosts() {
-  return prisma.post.findMany();
+export async function getEvents() {
+  return prisma.event.findMany();
 }
 
-export async function getPost(slug: string) {
-  return prisma.post.findUnique({ where: { slug } });
+export async function createEvent(
+      event: Pick<Event, "title"| "description" | "creatorid">
+){ 
+  return prisma.event.create({data : event});
 }
-
-export async function createPost(
-  post: Pick<Post, "slug" | "title" | "markdown">
-) {
-  return prisma.post.create({ data: post });
-}
-

@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+//import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "node_modules/@prisma/client";
 
 import { singleton } from "./singleton.server";
 
