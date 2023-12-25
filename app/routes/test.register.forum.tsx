@@ -11,6 +11,7 @@ import { getEvents } from "~/models/test.server";
 import './CSS/postNew.css';
 import QRCodePage from './QR';
 import { joinEvent } from "~/models/test.server";
+import { useOptionalUser } from "~/utils";
 
 
 
@@ -19,7 +20,8 @@ export const loader = async () => {
 };
 
 function handleJoinButtonClick(id: Event["id"]){
-      const userid = "1"; //place holder
+      const user = useOptionalUser();
+      const userid = user.id; //place holder
       return joinEvent({id, userid})
 }
 
