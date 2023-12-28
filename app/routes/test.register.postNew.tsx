@@ -11,6 +11,7 @@ import invariant from "tiny-invariant";
 import { createPost } from "~/models/post.server";
 import './CSS/postNew.css'
 import { createEvent } from "~/models/test.server";
+import { useOptionalUser } from "~/utils";
 
 export const action = async ({ request }: ActionArgs) => {
   // TODO: remove me
@@ -21,7 +22,7 @@ export const action = async ({ request }: ActionArgs) => {
   const title = formData.get("title");
   const description = formData.get("description");
   const creatorid = formData.get("creatorid");
-
+  
   const errors = {
     title: title ? null : "Title is required",
     description: description ? null : "description is required",
@@ -42,7 +43,7 @@ export const action = async ({ request }: ActionArgs) => {
     typeof description === "string",
     "slug must be a string"
   );
-  invariant(
+   invariant(
     typeof creatorid === "string",
     "creatorid must be a string"
   );
@@ -62,6 +63,10 @@ export default function NewPost() {
   const isCreating = Boolean(
     navigation.state === "submitting"
   );
+  const user = useOptionalUser();
+  const creatorid = user.id;
+  console.log(creatorid);
+
 
   const [selectedGame, setSelectedGame] = useState("")
 
@@ -98,18 +103,17 @@ export default function NewPost() {
         </label>
       </p>
       <br></br>
-      <p>
+       <p>
         <label style={{ width: '10px' }}>
-          id:{" "}
           <br></br>
           {errors?.creatorid ? (
             <em className="text-red-600">{errors.creatorid}</em>
           ) : null}
-          <input type="text" name="creatorid" className={inputClassName} />
+          <input type="hidden" name="creatorid" value={creatorid} />
         </label>
-      </p>
+      </p>  
       <br></br>
-      <p>
+        <p>
         <button
           type="submit"
           className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
