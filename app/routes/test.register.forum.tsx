@@ -10,7 +10,6 @@ import { getPosts } from "~/models/post.server";
 import { getEvents, joinEvent, getParticipantsFromEventId } from "~/models/test.server";
 import './CSS/postNew.css';
 import QRCodePage from './QR';
-import { joinEvent } from "~/models/test.server";
 import { useOptionalUser } from "~/utils";
 
 
