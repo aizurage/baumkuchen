@@ -89,12 +89,12 @@ export default function NewPost() {
       <br></br>
       <p>
         <label style={{ width: '10px' }}>
-          場所:{" "}
+          詳細:{" "}
           <br></br>
           {errors?.description ? (
             <em className="text-red-600">{errors.description}</em>
           ) : null}
-          <input type="text" name="description" className={inputClassName} />
+           <textarea name="description" className={inputClassName} />
         </label>
       </p>
       <br></br>
@@ -112,7 +112,8 @@ export default function NewPost() {
       <p>
         <button
           type="submit"
-          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
+          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600
+           focus:bg-blue-400 disabled:bg-blue-300"
           disabled={isCreating}
           >
           {isCreating ? "Creating..." : "Create Post"}
