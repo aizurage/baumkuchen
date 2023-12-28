@@ -17,6 +17,11 @@ export async function joinEvent(
   return prisma.eventUserInterface.create({data : eventUserInterface})
 }
 
+export async function getEvent(id : number) {
+  const eventID = Math.floor(id);
+  return prisma.event.findUnique({ where: { id : eventID } });
+}
+
 export async function getParticipantsFromEventId(eventID : EventUserInterface["id"] ){
   return prisma.eventUserInterface.findMany({
     where : {id :eventID}

@@ -32,7 +32,14 @@ export default function PostAdmin() {
         Blog Admin
       </h1>
             {posts.map((post) => (
+            
              <div style={{width :335,marginLeft : 'auto', marginRight: 'auto',borderRadius: 10,overflow:'hidden'}}>
+              <Link
+                to={'/test/' + post.id}
+                className="text-blue-600 underline"
+              >
+                {post.id}
+              </Link>
              <p style={{ backgroundColor: '#D7EEFF', height: 50, fontSize: 30, 
                               textAlign: 'center',color:'#FFFFEE',}}>{post.title}</p>
              <div style={{ backgroundColor: '#EEFFFF',color:'dodgerblue'}}>
