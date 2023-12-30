@@ -59,6 +59,7 @@ const inputClassName =
 export default function NewPost() {
   const errors = useActionData<typeof action>();
 
+  
   const navigation = useNavigation();
   const isCreating = Boolean(
     navigation.state === "submitting"
@@ -103,6 +104,7 @@ export default function NewPost() {
         </label>
       </p>
       <br></br>
+      
        <p>
         <label style={{ width: '10px' }}>
           <br></br>

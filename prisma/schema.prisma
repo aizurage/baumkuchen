@@ -70,7 +70,8 @@ model Event {
 }
 
 model EventUserInterface{
-  id Int @id
+  id String @id @default(cuid()) 
+  postid Int 
   userid String
 
   createdAt DateTime @default(now())
