@@ -75,6 +75,16 @@ export default function Index() {
           </Link>
         </div>
 
+        <div className="mx-auto mt-16 max-w-7xl text-center">
+          <Link
+            to="/icon"
+            className="text-xl text-blue-600 underline"
+          >
+          アイコン変更
+          </Link>
+        </div>
+
+
 
         <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
           <div className="mt-6 flex flex-wrap justify-center gap-8">

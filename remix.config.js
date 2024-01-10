@@ -13,4 +13,9 @@ module.exports = {
   postcss: true,
   serverModuleFormat: "cjs",
   tailwind: true,
+  browserNodeBuiltinsPolyfill: {
+    modules: {
+      path: true
+    }
+  }
 };
